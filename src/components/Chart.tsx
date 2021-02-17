@@ -31,16 +31,11 @@ export default function Chart({ data }: AmTimelineChartProps): ReactElement {
     chartRef.current = am4core.create(divRef.current, am4charts.XYChart);
     chartRef.current.data = data;
 
-    // let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     const dateAxis = new am4charts.DateAxis();
     const valueAxis = new am4charts.ValueAxis();
 
     chartRef.current.xAxes.push(dateAxis);
     chartRef.current.yAxes.push(valueAxis);
-
-    // dateAxis.renderer.grid.template.disabled = true;
-
-    // let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
     const lineSeries = chartRef.current.series.push(new am4charts.LineSeries());
     lineSeries.dataFields.valueY = 'sites';
@@ -56,6 +51,16 @@ export default function Chart({ data }: AmTimelineChartProps): ReactElement {
     chartRef.current.cursor = new am4charts.XYCursor();
     chartRef.current.cursor.snapToSeries = lineSeries;
     chartRef.current.cursor.xAxis = dateAxis;
+
+    const bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+    bullet.circle.radius = 3;
+    bullet.circle.fill = am4core.color('#134e5e');
+    bullet.circle.strokeWidth = 1;
+
+    chartRef.current.events.on('hit', (e) => {
+      console.log(lineSeries.tooltipDataItem.dataContext);
+    });
+
     return () => {
       if (chartRef.current) {
         chartRef.current.dispose();

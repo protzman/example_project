@@ -1,7 +1,8 @@
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { GlobalState } from '../redux/reducers';
+import { KeyboardArrowDown } from '@material-ui/icons';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Appbar() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { user_id } = useSelector((state: GlobalState) => state.authorization);
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed" elevation={0}>
@@ -33,6 +36,13 @@ export default function Appbar() {
             <Typography variant="h4">L A R V I S</Typography>
           </div>
           <div className={classes.spacer} />
+          <Button
+            color="secondary"
+            variant="outlined"
+            endIcon={<KeyboardArrowDown />}
+          >
+            {user_id}
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

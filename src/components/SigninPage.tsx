@@ -17,12 +17,21 @@ import { setApplicationLoading } from '../redux/actions/application';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      padding: theme.spacing(3),
-      background: theme.palette.primary.main,
-      width: 400,
-      position: 'absolute',
-      top: `calc(50% - 250px)`,
-      right: `calc(50% - 200px)`,
+      [theme.breakpoints.down('md')]: {
+        background: theme.palette.primary.main,
+        position: 'absolute',
+        padding: `55% ${theme.spacing(3)} `,
+        height: `100%`,
+        width: `100%`,
+      },
+      [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(3),
+        background: theme.palette.primary.main,
+        width: 400,
+        position: 'absolute',
+        top: `calc(50% - 250px)`,
+        right: `calc(50% - 200px)`,
+      },
     },
   })
 );
@@ -47,7 +56,6 @@ export default function SigninPage() {
         })
       );
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      dispatch(setApplicationLoading(false));
       history.push('/');
       // simulate load
     } catch (error) {
