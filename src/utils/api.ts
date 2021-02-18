@@ -4,7 +4,9 @@ import {
   TokenRequest,
   TokenResponse,
   AcquisitionResponse,
+  //TODO RENAME USER OBJECT TO SOMETHING LIKE AUTH'D USER / BASIC USER - EXTEND BASIC USER FOR USER RESPONSE?
   User,
+  UserResponse,
 } from './types';
 
 interface HttpResponse<T> extends Response {
@@ -55,12 +57,24 @@ export const fetchAcquisitions = async (
   return response;
 };
 
-export const userList = async (
+export const fetchUsers = async (
   token: string
 ): Promise<HttpResponse<User[]>> => {
   return await fetchAsync<User[]>(
     new Request(`${url}/users`, {
       method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  );
+};
+
+export const fetchUser = async (
+  token: string,
+  user_id: string
+): Promise<HttpResponse<UserResponse>> => {
+  return await fetchAsync<UserResponse>(
+    new Request(`${url}/users/${user_id}`, {
+      method: `GET`,
       headers: { Authorization: `Bearer ${token}` },
     })
   );

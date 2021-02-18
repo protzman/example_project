@@ -1,5 +1,5 @@
 {
-  "name": "create-react-app-with-typescript",
+  "name": "larvis",
   "version": "4.0.0",
   "private": true,
   "dependencies": {
@@ -11,6 +11,9 @@
     "@emotion/styled": "latest",
     "@material-ui/core": "next",
     "@material-ui/icons": "next",
+    "@types/faker": "^5.1.6",
+    "clsx": "^1.1.1",
+    "faker": "^5.4.0",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "^7.2.2",

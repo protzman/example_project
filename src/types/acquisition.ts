@@ -22,7 +22,6 @@ export interface NormalizedAcqusitionData {
   groupedEntries: DailyAcquisition[];
   averagePerDay: number;
   minMax: string;
-  max: number;
   total: number;
 }
 

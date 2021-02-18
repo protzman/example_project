@@ -6,7 +6,7 @@ import { Backdrop, CircularProgress, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import SigninPage from './components/SigninPage';
 import PrivateRoute from './components/PrivateRoute';
-import HomePage from './components/HomePage';
+import RoutingPage from './components/RoutingPage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function App() {
+  const classes = useStyles();
   const auth = useSelector((state: GlobalState) => state.authorization);
   const { loading, loadingText } = useSelector(
     (state: GlobalState) => state.application
   );
-  const classes = useStyles();
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -34,7 +34,7 @@ export default function App() {
           <Route exact path="/signin" component={SigninPage} />
           <PrivateRoute
             path="/"
-            component={HomePage}
+            component={RoutingPage}
             authorized={auth.authorized}
           />
         </Switch>

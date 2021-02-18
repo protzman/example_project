@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Appbar from './Appbar';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import DataCard from './DataCard';
 import {
@@ -25,25 +25,23 @@ const useStyles = makeStyles((theme: Theme) =>
     loadingText: {
       marginTop: theme.spacing(6),
     },
-    container: {
-      padding: theme.spacing(3),
-    },
     dataCard: {
       height: 200,
       textAlign: 'center',
     },
-    toolbar: theme.mixins.toolbar,
   })
 );
 
 export default function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { loading } = useSelector((state: GlobalState) => state.application);
+  const { token } = useSelector((state: GlobalState) => state.authorization);
   const { groupedAcquisitions, total, averagePerDay, minMax } = useSelector(
     (state: GlobalState) => state.acquisition
   );
-  const { loading } = useSelector((state: GlobalState) => state.application);
-  const { token } = useSelector((state: GlobalState) => state.authorization);
 
   useEffect(() => {
     dispatch(setApplicationLoading(true, `fetching acquisitions...`));
@@ -60,30 +58,30 @@ export default function HomePage() {
   }, []);
 
   return (
-    <React.Fragment>
-      <Appbar />
-      <div className={classes.toolbar} />
+    <div>
+      <Button
+        variant="outlined"
+        color="secondary"
+        onClick={() => history.push('/users')}
+      >
+        Users
+      </Button>
       {!loading && (
-        <div className={classes.container}>
-          <Grid container spacing={3}>
-            <DataCard primaryText={`${total}`} secondaryText={`Total Sites`} />
-            <DataCard
-              primaryText={`${averagePerDay}`}
-              secondaryText={`Sites/Day Average`}
-            />
-            <DataCard
-              primaryText={`${minMax}`}
-              secondaryText={`Minimum Maximum`}
-            />
-            <Grid item xs={12}>
-              <ChartCard
-                title={`Daily Sites Count`}
-                data={groupedAcquisitions}
-              />
-            </Grid>
+        <Grid container spacing={3}>
+          <DataCard primaryText={`${total}`} secondaryText={`Total Sites`} />
+          <DataCard
+            primaryText={`${averagePerDay}`}
+            secondaryText={`Sites/Day Average`}
+          />
+          <DataCard
+            primaryText={`${minMax}`}
+            secondaryText={`Minimum Maximum`}
+          />
+          <Grid item xs={12}>
+            <ChartCard title={`Daily Sites Count`} data={groupedAcquisitions} />
           </Grid>
-        </div>
+        </Grid>
       )}
-    </React.Fragment>
+    </div>
   );
 }

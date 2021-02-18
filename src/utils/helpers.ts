@@ -52,17 +52,21 @@ export function normalizeAcquisitions(
 
   const averagePerDay = parseFloat((total / groupedEntries.length).toFixed(1));
 
-  const minMax = `34 / 506`;
+  const minimum = groupedEntries.reduce((accumulator, currentValue) => {
+    return currentValue.sites < accumulator ? currentValue.sites : accumulator;
+  }, groupedEntries[0].sites);
 
-  const max =
-    [...allEntries].sort((a, b) => b.sites - a.sites).shift()?.sites || 0;
+  const maximum = groupedEntries.reduce((accumulator, currentValue) => {
+    return currentValue.sites > accumulator ? currentValue.sites : accumulator;
+  }, groupedEntries[0].sites);
+
+  const minMax = `${minimum} / ${maximum}`;
 
   return {
     allEntries: newEntries,
     groupedEntries,
     averagePerDay,
     minMax,
-    max,
     total,
   };
 }

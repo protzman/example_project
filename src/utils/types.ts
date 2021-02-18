@@ -27,6 +27,12 @@ export interface User {
   user_id: string;
 }
 
+export interface UserResponse {
+  user_id: string;
+  name?: string;
+  password?: string;
+}
+
 // Acquisition types ---
 
 export interface DailyAcquisition {
@@ -40,7 +46,6 @@ export interface NormalizedAcqusitionData {
   groupedEntries: DailyAcquisition[];
   averagePerDay: number;
   minMax: string;
-  max: number;
   total: number;
 }
 
