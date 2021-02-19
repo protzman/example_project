@@ -2,8 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
-import { Button, Grid } from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { Fab, Grid, Typography, useMediaQuery } from '@material-ui/core';
+import {
+  makeStyles,
+  createStyles,
+  Theme,
+  useTheme,
+} from '@material-ui/core/styles';
 import DataCard from './DataCard';
 import {
   fetchAcquisitionsRequest,
@@ -14,6 +19,7 @@ import ChartCard from './ChartCard';
 import { setApplicationLoading } from '../redux/actions/application';
 import { fetchAcquisitions } from '../utils/api';
 import { normalizeAcquisitions } from '../utils/helpers';
+import { People } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,6 +35,16 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 200,
       textAlign: 'center',
     },
+    fab: {
+      position: `fixed`,
+      padding: theme.spacing(1, 3),
+      left: theme.spacing(2),
+      bottom: theme.spacing(2),
+      color: theme.palette.text.primary,
+    },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
   })
 );
 
@@ -36,6 +52,10 @@ export default function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // get the screen size so we can display routing button to users
+  const theme = useTheme();
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const { loading } = useSelector((state: GlobalState) => state.application);
   const { token } = useSelector((state: GlobalState) => state.authorization);
@@ -59,28 +79,38 @@ export default function HomePage() {
 
   return (
     <div>
-      <Button
-        variant="outlined"
-        color="secondary"
-        onClick={() => history.push('/users')}
-      >
-        Users
-      </Button>
       {!loading && (
-        <Grid container spacing={3}>
-          <DataCard primaryText={`${total}`} secondaryText={`Total Sites`} />
-          <DataCard
-            primaryText={`${averagePerDay}`}
-            secondaryText={`Sites/Day Average`}
-          />
-          <DataCard
-            primaryText={`${minMax}`}
-            secondaryText={`Minimum Maximum`}
-          />
-          <Grid item xs={12}>
-            <ChartCard title={`Daily Sites Count`} data={groupedAcquisitions} />
+        <React.Fragment>
+          <Grid container spacing={3}>
+            <DataCard primaryText={`${total}`} secondaryText={`Total Sites`} />
+            <DataCard
+              primaryText={`${averagePerDay}`}
+              secondaryText={`Sites/Day Average`}
+            />
+            <DataCard
+              primaryText={`${minMax}`}
+              secondaryText={`Minimum Maximum`}
+            />
+            <Grid item xs={12}>
+              <ChartCard
+                title={`Daily Sites Count`}
+                data={groupedAcquisitions}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+          {smallScreen && (
+            <Fab
+              size="small"
+              variant="extended"
+              color="primary"
+              className={classes.fab}
+              onClick={() => history.push('/users')}
+            >
+              <People className={classes.extendedIcon} />
+              <Typography variant="overline">Users</Typography>
+            </Fab>
+          )}
+        </React.Fragment>
       )}
     </div>
   );

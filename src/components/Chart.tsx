@@ -37,6 +37,9 @@ export default function Chart({ data }: AmTimelineChartProps): ReactElement {
     chartRef.current.xAxes.push(dateAxis);
     chartRef.current.yAxes.push(valueAxis);
 
+    dateAxis.renderer.labels.template.fill = am4core.color('#fff');
+    valueAxis.renderer.labels.template.fill = am4core.color('#fff');
+
     const lineSeries = chartRef.current.series.push(new am4charts.LineSeries());
     lineSeries.dataFields.valueY = 'sites';
     lineSeries.dataFields.dateX = 'date';

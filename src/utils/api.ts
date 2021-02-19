@@ -7,6 +7,7 @@ import {
   //TODO RENAME USER OBJECT TO SOMETHING LIKE AUTH'D USER / BASIC USER - EXTEND BASIC USER FOR USER RESPONSE?
   User,
   UserResponse,
+  UserUpdate,
 } from './types';
 
 interface HttpResponse<T> extends Response {
@@ -76,6 +77,22 @@ export const fetchUser = async (
     new Request(`${url}/users/${user_id}`, {
       method: `GET`,
       headers: { Authorization: `Bearer ${token}` },
+    })
+  );
+};
+
+export const updateUser = async (
+  token: string,
+  user: UserUpdate
+): Promise<HttpResponse<UserResponse>> => {
+  return await fetchAsync<UserResponse>(
+    new Request(`${url}/users/${user.user_id}`, {
+      method: `POST`,
+      headers: { Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        name: user.name,
+        password: user.password,
+      }),
     })
   );
 };

@@ -27,9 +27,15 @@ export interface User {
   user_id: string;
 }
 
+export interface UserUpdate {
+  name: string;
+  password: string;
+  user_id?: string;
+}
+
 export interface UserResponse {
   user_id: string;
-  name?: string;
+  name: string;
   password?: string;
 }
 

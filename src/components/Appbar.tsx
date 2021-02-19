@@ -4,10 +4,16 @@ import {
   Toolbar,
   Typography,
   Button,
-  Menu,
-  MenuItem,
+  ButtonBase,
+  useMediaQuery,
 } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import {
+  createStyles,
+  darken,
+  makeStyles,
+  Theme,
+  useTheme,
+} from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
@@ -27,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
       transform: `skew(-7deg)`,
       padding: `0 1rem`,
       marginRight: `3rem`,
+      cursor: 'pointer',
+      '&:hover': {
+        background: darken(theme.palette.secondary.main, 0.2),
+      },
     },
   })
 );
@@ -35,6 +45,10 @@ export default function Appbar() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // get the screen size so we can display routing button to users
+  const theme = useTheme();
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const { user_id } = useSelector((state: GlobalState) => state.authorization);
 
@@ -49,9 +63,22 @@ export default function Appbar() {
     <div className={classes.root}>
       <AppBar position="fixed" elevation={0}>
         <Toolbar>
-          <div className={classes.titleCard} onClick={() => history.push('/')}>
+          <ButtonBase
+            className={classes.titleCard}
+            onClick={() => history.push('/')}
+          >
             <Typography variant="h4">L A R V I S</Typography>
-          </div>
+          </ButtonBase>
+          {!smallScreen && (
+            <Button
+              disableElevation
+              variant="outlined"
+              color="secondary"
+              onClick={() => history.push('/users')}
+            >
+              Users
+            </Button>
+          )}
           <div className={classes.spacer} />
           <Button
             color="secondary"

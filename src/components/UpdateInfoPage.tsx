@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Card,
@@ -11,8 +11,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory, useParams } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser } from '../utils/api';
+import { fetchUser, updateUser } from '../utils/api';
 import { setApplicationLoading } from '../redux/actions/application';
+import { updateUserRequest, updateUserSuccess } from '../redux/actions/user';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,93 +58,106 @@ export default function UpdateInfoPage() {
 
   useEffect(() => {
     async function fetch_user() {
+      dispatch(setApplicationLoading(true, `fetching user info...`));
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const response = await fetchUser(token, user_id);
       setCredentials({
         ...credentials,
+        // TODO try and get rid of it having to be || ''
         user_id: response.data?.user_id || '',
+        name: response.data?.name || '',
         password_old: response.data?.password || '',
       });
+      dispatch(setApplicationLoading(false));
     }
     fetch_user();
   }, []);
 
   async function updateInfo() {
-    // try {
-    //   dispatch(setApplicationLoading(true, `signing in...`));
-    //   dispatch(signInRequest(credentials));
-    //   const response = await fetchToken(credentials);
-    //   dispatch(
-    //     signInSuccess({
-    //       user_id: credentials.user_id,
-    //       token: response.data?.access,
-    //     })
-    //   );
-    //   await new Promise((resolve) => setTimeout(resolve, 1000));
-    //   history.push('/');
-    //   // simulate load
-    // } catch (error) {
-    //   if (error instanceof Error) {
-    //     console.log(`error... ${error}`);
-    //   }
-    // }
+    dispatch(setApplicationLoading(true, `updating user info...`));
+    try {
+      dispatch(updateUserRequest());
+
+      const response = await updateUser(token, {
+        user_id: credentials.user_id,
+        name: credentials.name,
+        password: credentials.password_new,
+      });
+
+      if (response.data) {
+        dispatch(
+          updateUserSuccess({
+            user_id: response.data?.user_id,
+            name: response.data?.name,
+          })
+        );
+      }
+
+      history.push('/');
+    } catch (error) {
+      console.log(`error... ${error}`);
+      dispatch(setApplicationLoading(false));
+    }
   }
 
   // TODO CREATE FORM HOOK
   return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Grid container spacing={4} direction="column">
-          <Grid item>
-            <Typography variant="h4">Update Info</Typography>
-          </Grid>
-          <Grid item>
-            <TextField
-              label="Username"
-              value={credentials.user_id}
-              onChange={(e) =>
-                setCredentials({
-                  ...credentials,
-                  user_id: e.currentTarget.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              disabled
-              label="Enter New Password"
-              value={credentials.password_old}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              label=" New Password"
-              type="password"
-              value={credentials.password_new}
-              onChange={(e) =>
-                setCredentials({
-                  ...credentials,
-                  password_new: e.currentTarget.value,
-                })
-              }
-            />
-          </Grid>
-          <Grid item>
-            <Button
-              fullWidth
-              variant="outlined"
-              color="secondary"
-              onClick={updateInfo}
-              // disabled={
-              //   credentials.user_id === '' || credentials.password === ''
-              // }
-            >
-              Update
-            </Button>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+    <React.Fragment>
+      {!loading && (
+        <Card className={classes.card}>
+          <CardContent>
+            <Grid container spacing={4} direction="column">
+              <Grid item>
+                <Typography variant="h4">Update Info</Typography>
+              </Grid>
+              <Grid item>
+                <TextField
+                  label="Name"
+                  value={credentials.name}
+                  onChange={(e) =>
+                    setCredentials({
+                      ...credentials,
+                      name: e.currentTarget.value,
+                    })
+                  }
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  disabled
+                  label="Existing Password"
+                  value={credentials.password_old}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  label="New Password"
+                  value={credentials.password_new}
+                  onChange={(e) =>
+                    setCredentials({
+                      ...credentials,
+                      password_new: e.currentTarget.value,
+                    })
+                  }
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  color="secondary"
+                  onClick={updateInfo}
+                  disabled={
+                    credentials.name === '' || credentials.password_new === ''
+                  }
+                >
+                  Update
+                </Button>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      )}
+    </React.Fragment>
   );
 }

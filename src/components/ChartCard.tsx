@@ -9,7 +9,6 @@ import Chart from './Chart';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
-      padding: theme.spacing(3),
       width: `100%`,
       textAlign: 'center',
     },
