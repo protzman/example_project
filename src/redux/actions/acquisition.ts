@@ -59,7 +59,7 @@ export const setNormalizedAcquisitionData = (
   return async (dispatch: Dispatch) => {
     dispatch({
       type: AcquisitionActionTypes.SET_NORMALIZED_ACQUISITIONS,
-      normalizedAcquisitions: normalizedAcquisitionData.allEntries,
+      normalizedAcquisitions: normalizedAcquisitionData.normalizedEntries,
       groupedAcquisitions: normalizedAcquisitionData.groupedEntries,
       perDayAcquisitions: normalizedAcquisitionData.perDayEntries,
       total: normalizedAcquisitionData.total,

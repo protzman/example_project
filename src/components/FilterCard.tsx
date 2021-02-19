@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cardContent: {
       [theme.breakpoints.up('md')]: {
-        height: 400,
+        height: 464,
       },
       display: 'flex',
       justifyContent: 'center',

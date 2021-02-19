@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-// TODO MOVE CHART PROPS TO LIKE APP PROPS OR SOMETHING
-import { ChartCardProps, DailyAcquisition } from '../utils/types';
 import Chart from './Chart';
 import BarChart from './BarChart';
 import { NormalizedAcquisition } from '../types/acquisition';

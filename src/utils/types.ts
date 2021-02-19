@@ -51,7 +51,7 @@ export interface PerDayAcquisition {
 }
 
 export interface NormalizedAcqusitionData {
-  allEntries: NormalizedAcquisition[];
+  normalizedEntries: NormalizedAcquisition[];
   groupedEntries: DailyAcquisition[];
   perDayEntries: PerDayAcquisition[];
   averagePerDay: number;

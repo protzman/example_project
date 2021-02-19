@@ -38,6 +38,7 @@ export default function Chart({ data }: AmTimelineChartProps): ReactElement {
     chartRef.current.yAxes.push(valueAxis);
 
     dateAxis.renderer.labels.template.fill = am4core.color('#fff');
+    dateAxis.baseInterval = { count: 10, timeUnit: 'second' };
     valueAxis.renderer.labels.template.fill = am4core.color('#fff');
 
     const lineSeries = chartRef.current.series.push(new am4charts.LineSeries());
