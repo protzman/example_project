@@ -10,6 +10,7 @@ import {
   useTheme,
 } from '@material-ui/core/styles';
 import DataCard from './DataCard';
+import FilterCard from './FilterCard';
 import {
   fetchAcquisitionsRequest,
   fetchAcquisitionsSuccess,
@@ -116,6 +117,9 @@ export default function HomePage() {
                 type="bar"
                 data={groupedAcquisitions}
               />
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <FilterCard />
             </Grid>
           </Grid>
           {smallScreen && (
