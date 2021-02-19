@@ -1,3 +1,5 @@
+import { PerDayAcquisition } from '../utils/types';
+
 export interface FetchAcquisitionsSuccess {
   acquisitions: AcquisitionResponse[];
 }
@@ -20,6 +22,7 @@ export interface DailyAcquisition {
 export interface NormalizedAcqusitionData {
   allEntries: NormalizedAcquisition[];
   groupedEntries: DailyAcquisition[];
+  perDayEntries: PerDayAcquisition[];
   averagePerDay: number;
   minMax: string;
   total: number;

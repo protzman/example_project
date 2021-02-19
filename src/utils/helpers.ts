@@ -2,6 +2,7 @@ import {
   AcquisitionResponse,
   DailyAcquisition,
   NormalizedAcqusitionData,
+  PerDayAcquisition,
 } from './types';
 
 /**
@@ -26,6 +27,8 @@ export function normalizeAcquisitions(
     };
   });
 
+  const perDayEntries: PerDayAcquisition[] = [];
+
   const groupedEntries = newEntries.reduce(
     (accumulator: DailyAcquisition[], currentValue) => {
       const found = accumulator.find(
@@ -34,12 +37,25 @@ export function normalizeAcquisitions(
       if (found) {
         found.sites = found.sites + currentValue.sites;
         found.total = found.total + 1;
+
+        // find the record in the perDayEntries and push this 'curreentValue' to the acquisitions array
+        const dayFound = perDayEntries.find(
+          (item) => item.date === currentValue.groupedDate
+        );
+        dayFound?.acquisitions.push(currentValue);
       } else {
         accumulator.push({
           date: currentValue.groupedDate,
           total: 1,
           sites: currentValue.sites,
         });
+
+        // new entry in the perDay entries array - add date and push the 'currentValue' to it
+        const perDayAcquisition: PerDayAcquisition = {
+          date: currentValue.groupedDate,
+          acquisitions: [currentValue],
+        };
+        perDayEntries.push(perDayAcquisition);
       }
       return accumulator;
     },
@@ -65,6 +81,7 @@ export function normalizeAcquisitions(
   return {
     allEntries: newEntries,
     groupedEntries,
+    perDayEntries,
     averagePerDay,
     minMax,
     total,

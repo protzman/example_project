@@ -5,6 +5,7 @@ import {
   NormalizedAcqusitionData,
   DailyAcquisition,
 } from '../../types/acquisition';
+import { PerDayAcquisition } from '../../utils/types';
 
 export enum AcquisitionActionTypes {
   FETCH_ACQUISITIONS_REQUEST = 'FETCH_ACQUISITIONS_REQUEST',
@@ -18,6 +19,7 @@ interface AcquisitionAction {
   acquisitions: AcquisitionResponse[];
   normalizedAcquisitions: NormalizedAcquisition[];
   groupedAcquisitions: DailyAcquisition[];
+  perDayAcquisitions: PerDayAcquisition[];
   total: number;
   averagePerDay: number;
   minMax: string;
@@ -59,6 +61,7 @@ export const setNormalizedAcquisitionData = (
       type: AcquisitionActionTypes.SET_NORMALIZED_ACQUISITIONS,
       normalizedAcquisitions: normalizedAcquisitionData.allEntries,
       groupedAcquisitions: normalizedAcquisitionData.groupedEntries,
+      perDayAcquisitions: normalizedAcquisitionData.perDayEntries,
       total: normalizedAcquisitionData.total,
       averagePerDay: normalizedAcquisitionData.averagePerDay,
       minMax: normalizedAcquisitionData.minMax,

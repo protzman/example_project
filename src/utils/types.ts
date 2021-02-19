@@ -42,9 +42,18 @@ export interface DailyAcquisition {
   sites: number;
 }
 
+/**
+ * PerDayAcquisition are a group of the acquisitions that occur on the same day and the date they occur
+ */
+export interface PerDayAcquisition {
+  date: string;
+  acquisitions: NormalizedAcquisition[];
+}
+
 export interface NormalizedAcqusitionData {
   allEntries: NormalizedAcquisition[];
   groupedEntries: DailyAcquisition[];
+  perDayEntries: PerDayAcquisition[];
   averagePerDay: number;
   minMax: string;
   total: number;

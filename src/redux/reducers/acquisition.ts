@@ -4,6 +4,7 @@ import {
   NormalizedAcquisition,
   DailyAcquisition,
 } from '../../types/acquisition';
+import { PerDayAcquisition } from '../../utils/types';
 import {
   AcquisitionActions,
   AcquisitionActionTypes,
@@ -13,6 +14,7 @@ export interface AcquisitionState {
   acquisitions: AcquisitionResponse[];
   normalizedAcquisitions: NormalizedAcquisition[];
   groupedAcquisitions: DailyAcquisition[];
+  perDayAcquisitions: PerDayAcquisition[];
   total: number;
   averagePerDay: number;
   minMax: string;
@@ -22,6 +24,7 @@ const initialAcquisitionState: AcquisitionState = {
   acquisitions: [],
   normalizedAcquisitions: [],
   groupedAcquisitions: [],
+  perDayAcquisitions: [],
   total: 0,
   averagePerDay: 0,
   minMax: '',
@@ -51,6 +54,7 @@ export const acquisitionReducer: Reducer<
         ...state,
         normalizedAcquisitions: action.normalizedAcquisitions,
         groupedAcquisitions: action.groupedAcquisitions,
+        perDayAcquisitions: action.perDayAcquisitions,
         total: action.total,
         averagePerDay: action.averagePerDay,
         minMax: action.minMax,
