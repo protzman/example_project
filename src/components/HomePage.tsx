@@ -105,7 +105,15 @@ export default function HomePage() {
             />
             <Grid item xs={12}>
               <ChartCard
-                title={`Daily Sites Count`}
+                title={`Grouped Daily Sites Count`}
+                type="line"
+                data={groupedAcquisitions}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <ChartCard
+                title={`Grouped Daily Sites Count`}
+                type="bar"
                 data={groupedAcquisitions}
               />
             </Grid>

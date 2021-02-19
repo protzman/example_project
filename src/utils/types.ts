@@ -10,6 +10,7 @@ export interface SignInSuccess {
 
 export interface ChartCardProps {
   title: string;
+  type: string;
   data: DailyAcquisition[];
 }
 
