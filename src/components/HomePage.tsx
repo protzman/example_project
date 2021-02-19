@@ -17,9 +17,10 @@ import {
 } from '../redux/actions/acquisition';
 import ChartCard from './ChartCard';
 import { setApplicationLoading } from '../redux/actions/application';
-import { fetchAcquisitions } from '../utils/api';
+import { fetchUser, fetchAcquisitions } from '../utils/api';
 import { normalizeAcquisitions } from '../utils/helpers';
 import { People } from '@material-ui/icons';
+import { fetchUserRequest, fetchUserSuccess } from '../redux/actions/user';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +59,9 @@ export default function HomePage() {
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const { loading } = useSelector((state: GlobalState) => state.application);
-  const { token } = useSelector((state: GlobalState) => state.authorization);
+  const { token, user_id } = useSelector(
+    (state: GlobalState) => state.authorization
+  );
   const { groupedAcquisitions, total, averagePerDay, minMax } = useSelector(
     (state: GlobalState) => state.acquisition
   );
@@ -67,11 +70,20 @@ export default function HomePage() {
     dispatch(setApplicationLoading(true, `fetching acquisitions...`));
     dispatch(fetchAcquisitionsRequest());
     async function fetch_acquisitions() {
+      // simulate loading
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      const response = await fetchAcquisitions(token);
-      const results = response?.data ?? [];
-      dispatch(fetchAcquisitionsSuccess(results));
-      dispatch(setNormalizedAcquisitionData(normalizeAcquisitions(results)));
+
+      // fetch the user that just signed in
+      dispatch(fetchUserRequest());
+      const user = await fetchUser(token, user_id);
+      dispatch(fetchUserSuccess(user));
+
+      //fetch the acquisitions
+      const acquisitions = await fetchAcquisitions(token);
+      dispatch(fetchAcquisitionsSuccess(acquisitions));
+      dispatch(
+        setNormalizedAcquisitionData(normalizeAcquisitions(acquisitions))
+      );
       dispatch(setApplicationLoading(false));
     }
     fetch_acquisitions();

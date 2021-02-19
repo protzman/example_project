@@ -63,10 +63,9 @@ export default function UpdateInfoPage() {
       const response = await fetchUser(token, user_id);
       setCredentials({
         ...credentials,
-        // TODO try and get rid of it having to be || ''
-        user_id: response.data?.user_id || '',
-        name: response.data?.name || '',
-        password_old: response.data?.password || '',
+        user_id: response.user_id,
+        name: response.name,
+        password_old: response.password || '',
       });
       dispatch(setApplicationLoading(false));
     }
@@ -81,14 +80,18 @@ export default function UpdateInfoPage() {
       const response = await updateUser(token, {
         user_id: credentials.user_id,
         name: credentials.name,
-        password: credentials.password_new,
+        // pass in the old password if they didn't change it
+        password:
+          credentials.password_new === ''
+            ? credentials.password_old
+            : credentials.password_new,
       });
 
-      if (response.data) {
+      if (response) {
         dispatch(
           updateUserSuccess({
-            user_id: response.data?.user_id,
-            name: response.data?.name,
+            user_id: response.user_id,
+            name: response.name,
           })
         );
       }
@@ -148,7 +151,7 @@ export default function UpdateInfoPage() {
                   color="secondary"
                   onClick={updateInfo}
                   disabled={
-                    credentials.name === '' || credentials.password_new === ''
+                    credentials.name === '' && credentials.password_new === ''
                   }
                 >
                   Update

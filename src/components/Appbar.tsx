@@ -6,6 +6,7 @@ import {
   Button,
   ButtonBase,
   useMediaQuery,
+  Fade,
 } from '@material-ui/core';
 import {
   createStyles,
@@ -50,7 +51,7 @@ export default function Appbar() {
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const { user_id } = useSelector((state: GlobalState) => state.authorization);
+  const { user } = useSelector((state: GlobalState) => state.user);
 
   async function handleSignOut() {
     dispatch(setApplicationLoading(true, `signing out...`));
@@ -80,14 +81,19 @@ export default function Appbar() {
             </Button>
           )}
           <div className={classes.spacer} />
-          <Button
-            color="secondary"
-            variant="outlined"
-            endIcon={<ExitToApp />}
-            onClick={handleSignOut}
-          >
-            {user_id}
-          </Button>
+          {user.name && (
+            // unnecessary fade in animation :)
+            <Fade in={user.name !== ''}>
+              <Button
+                color="secondary"
+                variant="outlined"
+                endIcon={<ExitToApp />}
+                onClick={handleSignOut}
+              >
+                {user.name}
+              </Button>
+            </Fade>
+          )}
         </Toolbar>
       </AppBar>
     </div>

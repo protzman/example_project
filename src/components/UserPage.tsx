@@ -20,8 +20,7 @@ export default function UserPage() {
     async function fetch_users() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const response = await fetchUsers(token);
-      const results = response?.data ?? [];
-      dispatch(fetchUsersSuccess(results));
+      dispatch(fetchUsersSuccess(response));
       dispatch(setApplicationLoading(false));
     }
     fetch_users();

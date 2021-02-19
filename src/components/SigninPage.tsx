@@ -52,7 +52,7 @@ export default function SigninPage() {
       dispatch(
         signInSuccess({
           user_id: credentials.user_id,
-          token: response.data?.access,
+          token: response.access,
         })
       );
       await new Promise((resolve) => setTimeout(resolve, 1000));

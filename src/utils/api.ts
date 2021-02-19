@@ -14,14 +14,8 @@ interface HttpResponse<T> extends Response {
   data?: T;
 }
 
-const fetchAsync = async <T>(
-  request: RequestInfo
-): Promise<HttpResponse<T>> => {
-  const response: HttpResponse<T> = await fetch(request);
-
-  try {
-    response.data = await response.json();
-  } catch (ex) {}
+const fetchAsync = async (request: RequestInfo): Promise<Response> => {
+  const response = await fetch(request);
 
   if (!response.ok) {
     throw new Error(`${response.status}: ${response.statusText}`);
@@ -33,8 +27,8 @@ const fetchAsync = async <T>(
 export const fetchToken = async ({
   user_id,
   password,
-}: TokenRequest): Promise<HttpResponse<TokenResponse>> => {
-  const response = await fetchAsync<TokenResponse>(
+}: TokenRequest): Promise<TokenResponse> => {
+  const response = await fetchAsync(
     new Request(`${url}/token`, {
       method: 'POST',
       body: JSON.stringify({
@@ -43,49 +37,53 @@ export const fetchToken = async ({
       }),
     })
   );
-  return response;
+  const data = await response.json();
+  return data;
 };
 
 export const fetchAcquisitions = async (
   token: string
-): Promise<HttpResponse<AcquisitionResponse[]>> => {
-  const response = await fetchAsync<AcquisitionResponse[]>(
+): Promise<AcquisitionResponse[]> => {
+  const response = await fetchAsync(
     new Request(`${url}/acquisitions`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     })
   );
-  return response;
+  const data = await response.json();
+  return data;
 };
 
-export const fetchUsers = async (
-  token: string
-): Promise<HttpResponse<User[]>> => {
-  return await fetchAsync<User[]>(
+export const fetchUsers = async (token: string): Promise<User[]> => {
+  const response = await fetchAsync(
     new Request(`${url}/users`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     })
   );
+  const data = await response.json();
+  return data;
 };
 
 export const fetchUser = async (
   token: string,
   user_id: string
-): Promise<HttpResponse<UserResponse>> => {
-  return await fetchAsync<UserResponse>(
+): Promise<UserResponse> => {
+  const response = await fetchAsync(
     new Request(`${url}/users/${user_id}`, {
       method: `GET`,
       headers: { Authorization: `Bearer ${token}` },
     })
   );
+  const data = await response.json();
+  return data;
 };
 
 export const updateUser = async (
   token: string,
   user: UserUpdate
-): Promise<HttpResponse<UserResponse>> => {
-  return await fetchAsync<UserResponse>(
+): Promise<UserResponse> => {
+  const response = await fetchAsync(
     new Request(`${url}/users/${user.user_id}`, {
       method: `POST`,
       headers: { Authorization: `Bearer ${token}` },
@@ -95,4 +93,6 @@ export const updateUser = async (
       }),
     })
   );
+  const data = await response.json();
+  return data;
 };
