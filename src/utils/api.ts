@@ -5,10 +5,10 @@ import {
   TokenResponse,
   AcquisitionResponse,
   //TODO RENAME USER OBJECT TO SOMETHING LIKE AUTH'D USER / BASIC USER - EXTEND BASIC USER FOR USER RESPONSE?
-  User,
   UserResponse,
   UserUpdate,
 } from './types';
+import { User } from '../types/user';
 
 interface HttpResponse<T> extends Response {
   data?: T;

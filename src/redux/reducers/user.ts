@@ -4,12 +4,12 @@ import { UserActions, UserActionTypes } from '../actions/user';
 
 export interface UserState {
   users: UserResponse[];
-  user: User;
+  user: User | undefined;
 }
 
 const initialUserState: UserState = {
   users: [],
-  user: {},
+  user: undefined,
 };
 
 export const userReducer: Reducer<UserState, UserActions> = (

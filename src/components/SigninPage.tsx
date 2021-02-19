@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { fetchToken } from '../utils/api';
 import { signInRequest, signInSuccess } from '../redux/actions/auth';
 import { setApplicationLoading } from '../redux/actions/application';
+import { TokenRequest } from '../utils/types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,18 +36,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const initialState = {
+  user_id: '',
+  password: '',
+};
+
 export default function SigninPage() {
   const dispatch = useDispatch();
-  const [credentials, setCredentials] = useState({
-    user_id: '',
-    password: '',
-  });
+  const [credentials, setCredentials] = useState<TokenRequest>(initialState);
   const classes = useStyles();
   const history = useHistory();
 
   async function signin() {
     try {
       dispatch(setApplicationLoading(true, `signing in...`));
+      // simulate load
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(signInRequest(credentials));
       const response = await fetchToken(credentials);
       dispatch(
@@ -55,13 +61,13 @@ export default function SigninPage() {
           token: response.access,
         })
       );
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       history.push('/');
-      // simulate load
     } catch (error) {
       if (error instanceof Error) {
         console.log(`error... ${error}`);
       }
+      setCredentials(initialState);
+      dispatch(setApplicationLoading(false));
     }
   }
 

@@ -8,10 +8,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, updateUser } from '../utils/api';
+import { updateUser } from '../utils/api';
 import { setApplicationLoading } from '../redux/actions/application';
 import { updateUserRequest, updateUserSuccess } from '../redux/actions/user';
 
@@ -45,6 +45,7 @@ export default function UpdateInfoPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
   const [credentials, setCredentials] = useState({
     user_id: '',
     name: '',
@@ -52,24 +53,20 @@ export default function UpdateInfoPage() {
     password_new: '',
   });
 
-  const { user_id } = useParams<UpdateInfoPageProps>();
   const { loading } = useSelector((state: GlobalState) => state.application);
   const { token } = useSelector((state: GlobalState) => state.authorization);
+  const { user } = useSelector((state: GlobalState) => state.user);
 
   useEffect(() => {
-    async function fetch_user() {
-      dispatch(setApplicationLoading(true, `fetching user info...`));
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const response = await fetchUser(token, user_id);
+    if (user) {
       setCredentials({
         ...credentials,
-        user_id: response.user_id,
-        name: response.name,
-        password_old: response.password || '',
+        user_id: user.user_id,
+        name: user.name,
+        password_new: '',
+        password_old: user.password || '',
       });
-      dispatch(setApplicationLoading(false));
     }
-    fetch_user();
   }, []);
 
   async function updateInfo() {

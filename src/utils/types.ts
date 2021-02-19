@@ -21,12 +21,6 @@ export interface TokenRequest {
 export interface TokenResponse {
   access: string;
 }
-
-export interface User {
-  name: string;
-  user_id: string;
-}
-
 export interface UserUpdate {
   name: string;
   password: string;

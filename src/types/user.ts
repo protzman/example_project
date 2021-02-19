@@ -4,6 +4,7 @@ export interface UserResponse {
 }
 
 export interface User {
-  user_id?: string;
-  name?: string;
+  user_id: string;
+  name: string;
+  password?: string;
 }

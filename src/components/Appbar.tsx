@@ -81,7 +81,7 @@ export default function Appbar() {
             </Button>
           )}
           <div className={classes.spacer} />
-          {user.name && (
+          {user && (
             // unnecessary fade in animation :)
             <Fade in={user.name !== ''}>
               <Button

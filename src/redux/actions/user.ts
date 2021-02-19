@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { UserResponse } from '../../types/user';
-import { User } from '../../utils/types';
+import { User } from '../../types/user';
 
 export enum UserActionTypes {
   FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST',
@@ -19,7 +19,7 @@ export enum UserActionTypes {
 interface UserAction {
   type: UserActionTypes;
   users: UserResponse[];
-  user: User;
+  user: User | undefined;
 }
 
 export const fetchUsersRequest = () => {
