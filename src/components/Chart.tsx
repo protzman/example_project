@@ -2,10 +2,10 @@ import { ReactElement, useLayoutEffect, useRef } from 'react';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { DailyAcquisition } from '../types/acquisition';
+import { DailyAcquisition, NormalizedAcquisition } from '../types/acquisition';
 
 export interface AmTimelineChartProps {
-  data: DailyAcquisition[];
+  data: DailyAcquisition[] | NormalizedAcquisition[];
 }
 
 const useStyles = makeStyles((theme: Theme) =>

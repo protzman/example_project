@@ -10,15 +10,11 @@ import {
   Button,
   TextField,
   Autocomplete,
-  ListItem,
-  ListItemText,
-  IconButton,
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { DailyAcquisition, PerDayAcquisition } from '../utils/types';
 import Chart from './Chart';
 import BarChart from './BarChart';
-import { Search } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,24 +47,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function FilterCard() {
+interface FilterCardProps {
+  onChange(perDayAcquisition: PerDayAcquisition): void;
+}
+
+export default function FilterCard({ onChange }: FilterCardProps) {
   const classes = useStyles();
   const { perDayAcquisitions } = useSelector(
     (state: GlobalState) => state.acquisition
   );
-  const [activeDate, setActiveDate] = useState<PerDayAcquisition>();
-
-  // TODO turn type to enum
-  function renderChart(type: string, data: DailyAcquisition[]) {
-    switch (type) {
-      case 'line':
-        return <Chart data={data} />;
-      case 'bar':
-        return <BarChart data={data} />;
-      default:
-        <Typography variant="overline">Something went wrong...</Typography>;
-    }
-  }
 
   return (
     <Card className={classes.card}>
@@ -100,7 +87,7 @@ export default function FilterCard() {
                 />
               )}
               getOptionLabel={(option: PerDayAcquisition) => option.date}
-              onChange={(event, value) => value && setActiveDate(value)}
+              onChange={(event, value) => value && onChange(value)}
             />
           </Grid>
           <Grid item className={classes.gridItem}>

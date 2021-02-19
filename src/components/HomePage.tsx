@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
@@ -22,6 +22,8 @@ import { fetchUser, fetchAcquisitions } from '../utils/api';
 import { normalizeAcquisitions } from '../utils/helpers';
 import { People } from '@material-ui/icons';
 import { fetchUserRequest, fetchUserSuccess } from '../redux/actions/user';
+import { PerDayAcquisition } from '../utils/types';
+import NormalizedChartCard from './NormalizedChartCard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,6 +56,7 @@ export default function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [activeDate, setActiveDate] = useState<PerDayAcquisition>();
 
   // get the screen size so we can display routing button to users
   const theme = useTheme();
@@ -118,9 +121,20 @@ export default function HomePage() {
                 data={groupedAcquisitions}
               />
             </Grid>
-            <Grid item xs={12} lg={6}>
-              <FilterCard />
+            <Grid item xs={12} lg={4}>
+              <FilterCard onChange={setActiveDate} />
             </Grid>
+            {activeDate && (
+              <Grid item xs={12} lg={8}>
+                <NormalizedChartCard
+                  title={`Sites for ${new Date(
+                    activeDate?.date
+                  ).toLocaleString()}`}
+                  type="line"
+                  data={activeDate?.acquisitions}
+                />
+              </Grid>
+            )}
           </Grid>
           {smallScreen && (
             <Fab
