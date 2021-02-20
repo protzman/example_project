@@ -93,7 +93,10 @@ export default function UpdateInfoPage() {
         );
       }
 
-      history.push('/');
+      history.push('/', {
+        from: '/users/update',
+        alert: `Updated account info.`,
+      });
     } catch (error) {
       console.log(`error... ${error}`);
       dispatch(setApplicationLoading(false));

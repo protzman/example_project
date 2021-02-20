@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { Fab, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import {
@@ -58,10 +58,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface RouteState {
+  from: string;
+  alert: string;
+}
+
 export default function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const { state } = useLocation<RouteState>();
+
   const [activeDate, setActiveDate] = useState<PerDayAcquisition>();
 
   // get the screen size so we can display routing button to users
@@ -95,7 +102,19 @@ export default function HomePage() {
         setNormalizedAcquisitionData(normalizeAcquisitions(acquisitions))
       );
       dispatch(setApplicationLoading(false));
-      dispatch(setSnackbarMessage(`signed in as ${user.name}`, `success`));
+      const { from, alert } = state || '';
+      if (from) {
+        switch (from) {
+          case '/signin':
+            dispatch(setSnackbarMessage(`${alert} ${user.name}`, `success`));
+            break;
+          case '/users/update':
+            dispatch(setSnackbarMessage(`${alert}`, `success`));
+            break;
+          default:
+            break;
+        }
+      }
     }
     fetch_acquisitions();
   }, []);

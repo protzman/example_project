@@ -63,10 +63,12 @@ export default function SigninPage() {
           token: response.access,
         })
       );
-      history.push('/');
+      history.push('/', { from: '/signin', alert: `Signed in as` });
     } catch (error) {
       if (error instanceof Error) {
-        dispatch(setSnackbarMessage(`invalid login. try again`, `error`));
+        dispatch(
+          setSnackbarMessage(`Invalid login. Please try again`, `error`)
+        );
       }
       setCredentials(initialState);
       dispatch(setApplicationLoading(false));

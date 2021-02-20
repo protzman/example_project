@@ -5,3 +5,5 @@
 - chart zoom buttons to be theme
 
 GOING BACK TO HOME PAGE FLASHES UNLOADED CONTENT
+
+add snackbar for validation on upddate page

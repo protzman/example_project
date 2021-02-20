@@ -20,7 +20,10 @@ import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../redux/reducers';
 import { ExitToApp } from '@material-ui/icons';
 import { signOut } from '../redux/actions/auth';
-import { setApplicationLoading } from '../redux/actions/application';
+import {
+  setApplicationLoading,
+  setSnackbarMessage,
+} from '../redux/actions/application';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -58,6 +61,7 @@ export default function Appbar() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(signOut());
     dispatch(setApplicationLoading(false));
+    dispatch(setSnackbarMessage(`Goodbye ${user?.name}!`, `info`));
   }
 
   return (

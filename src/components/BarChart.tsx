@@ -56,10 +56,10 @@ export default function Chart({ data }: AmBarChartProps): ReactElement {
     chartRef.current.cursor.snapToSeries = lineSeries;
     chartRef.current.cursor.xAxis = dateAxis;
 
-    const bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
-    bullet.circle.radius = 3;
-    bullet.circle.fill = am4core.color('#134e5e');
-    bullet.circle.strokeWidth = 1;
+    // const bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+    // bullet.circle.radius = 3;
+    // bullet.circle.fill = am4core.color('#134e5e');
+    // bullet.circle.strokeWidth = 1;
 
     chartRef.current.events.on('hit', (e) => {
       console.log(lineSeries.tooltipDataItem.dataContext);
