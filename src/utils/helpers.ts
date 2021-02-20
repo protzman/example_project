@@ -1,4 +1,3 @@
-import { add } from '@amcharts/amcharts4/.internal/core/utils/Array';
 import {
   AcquisitionResponse,
   DailyAcquisition,
@@ -17,23 +16,31 @@ export function normalizeAcquisitions(
   // sort data and turn timestamps into dates
   let allEntries = acquisitions.sort((a, b) => a.timestamp - b.timestamp) || [];
 
-  const normalizedEntries = allEntries.map((item, idx) => {
-    console.log(`---${idx}`);
-    let dateObj = new Date(item.timestamp * 1000);
-    let groupedDate = new Date(item.timestamp * 1000);
-    groupedDate.setHours(1, 1, 1, 1);
-    console.log(dateObj.toString());
-    console.log(groupedDate.toString());
+  const normalizedEntries = allEntries.map((item) => {
+    const originDate = new Date(item.timestamp * 1000);
+
+    const timezoneDifference = originDate.getTimezoneOffset() / 60;
+    const correctedDate = new Date(
+      originDate.setHours(originDate.getHours() - timezoneDifference)
+    );
+
+    const groupedDate = new Date(item.timestamp * 1000);
+    groupedDate.setHours(0, 0, 0, 0);
+    // console.log(correctedDate);
+    // console.log(groupedDate);
+
+    // ---
+    // console.log(correctedDate.toISOString());
+    // console.log(groupedDate.toISOString());
+
     const normalizedEntry: NormalizedAcquisition = {
       sites: item.sites,
-      date: dateObj.toISOString(),
+      date: correctedDate.toISOString(),
       groupedDate: groupedDate.toISOString(),
     };
     console.log(normalizedEntry);
     return normalizedEntry;
   });
-
-  // const perDayEntries: PerDayAcquisition[] = [];
 
   const groupedEntries = normalizedEntries.reduce(
     (accumulator: DailyAcquisition[], currentValue) => {
@@ -43,38 +50,12 @@ export function normalizeAcquisitions(
       if (found) {
         found.sites = found.sites + currentValue.sites;
         found.total = found.total + 1;
-
-        /**
-         * Go through the per day entries array and find an entry where the date field is equal
-         * to the currentValue's grouped date field. if you find it, push the currentValue to the
-         * perDayValue.acquisions array
-         */
-        // const dayFound = perDayEntries.find(
-        //   (item) => item.date === currentValue.groupedDate
-        // );
-        // dayFound?.acquisitions.push(currentValue);
-
-        // ---------------------------------------------------------------------------------------
       } else {
         accumulator.push({
           date: currentValue.groupedDate,
           total: 1,
           sites: currentValue.sites,
         });
-
-        // new entry in the perDay entries array - add date and push the 'currentValue' to it
-        /**
-         * assuming that you didnt find one in the first pass above, you should create a PerDayAcquisition
-         * object and push it to the perDayentries array with the date as the currentValue.groupedDate, and
-         * the first acquisition as the currentValue
-         */
-        // const perDayAcquisition: PerDayAcquisition = {
-        //   date: currentValue.groupedDate,
-        //   acquisitions: [currentValue],
-        // };
-        // perDayEntries.push(perDayAcquisition);
-
-        // ---------------------------------------------------------------------------------------
       }
       return accumulator;
     },
