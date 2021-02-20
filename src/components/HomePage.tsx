@@ -21,7 +21,10 @@ import FilterCard from './FilterCard';
 import NormalizedChartCard from './NormalizedChartCard';
 
 import { GlobalState } from '../redux/reducers';
-import { setApplicationLoading } from '../redux/actions/application';
+import {
+  setApplicationLoading,
+  setSnackbarMessage,
+} from '../redux/actions/application';
 import { fetchUser, fetchAcquisitions } from '../utils/api';
 import { normalizeAcquisitions } from '../utils/helpers';
 import { People } from '@material-ui/icons';
@@ -92,6 +95,7 @@ export default function HomePage() {
         setNormalizedAcquisitionData(normalizeAcquisitions(acquisitions))
       );
       dispatch(setApplicationLoading(false));
+      dispatch(setSnackbarMessage(`signed in as ${user.name}`, `success`));
     }
     fetch_acquisitions();
   }, []);

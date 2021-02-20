@@ -7,6 +7,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import SigninPage from './components/SigninPage';
 import PrivateRoute from './components/PrivateRoute';
 import RoutingPage from './components/RoutingPage';
+import SnackBar from './components/Snackbar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,6 +46,7 @@ export default function App() {
           {loadingText}
         </Typography>
       </Backdrop>
+      <SnackBar />
     </React.Fragment>
   );
 }

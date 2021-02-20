@@ -1,14 +1,6 @@
 import { Dispatch } from 'redux';
 
-export enum ApplicationActionTypes {
-  SET_APPLICATION_LOADING = 'SET_APPLICATION_LOADING',
-}
-
-interface ApplicationAction {
-  type: ApplicationActionTypes;
-  loading: boolean;
-  loadingText?: string;
-}
+import { ApplicationActionTypes, Severity } from '../../types';
 
 export const setApplicationLoading = (
   loading: boolean,
@@ -23,4 +15,12 @@ export const setApplicationLoading = (
   };
 };
 
-export type ApplicationActions = ApplicationAction;
+export const setSnackbarMessage = (message: string, severity?: Severity) => {
+  return async (dispatch: Dispatch) => {
+    dispatch({
+      type: ApplicationActionTypes.SET_SNACKBAR_MESSAGE,
+      message,
+      severity,
+    });
+  };
+};

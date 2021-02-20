@@ -32,7 +32,6 @@ export function normalizeAcquisitions(
       date: correctedDate.toISOString(),
       groupedDate: groupedDate.toISOString(),
     };
-    console.log(normalizedEntry);
     return normalizedEntry;
   });
 

@@ -12,7 +12,10 @@ import {
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { fetchToken } from '../utils/api';
 import { signInRequest, signInSuccess } from '../redux/actions/auth';
-import { setApplicationLoading } from '../redux/actions/application';
+import {
+  setApplicationLoading,
+  setSnackbarMessage,
+} from '../redux/actions/application';
 import { TokenRequest } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,7 +66,7 @@ export default function SigninPage() {
       history.push('/');
     } catch (error) {
       if (error instanceof Error) {
-        console.log(`error... ${error}`);
+        dispatch(setSnackbarMessage(`invalid login. try again`, `error`));
       }
       setCredentials(initialState);
       dispatch(setApplicationLoading(false));
