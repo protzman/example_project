@@ -33,4 +33,46 @@ Bootstrapped with Create React App and built with Typescript, Material-ui, and R
     ```
     This would be nice so you don't have to go out and fetch the user right away if you wanted to display who has signed in for example in the header. I ended up going and fetching the current signed in user after signing in for this reason, but if I had the name returned with the token I could just wait off on the request until I wen't to gather all users, or update the signed in user
 
+### Desktop Screenshots
+---
+Sign in page
+![signin](./screenshots/larvis_signin.PNG)
+
+Home page
+![home](./screenshots/larvis_home.PNG)
+
+Home page (cont.)
+![home_2](./screenshots/larvis_home_2.PNG)
+
+View all users
+![users](./screenshots/larvis_users.PNG)
+
+Update a user
+![update_user](./screenshots/larvis_update_user.PNG)
+
+### Mobile Screenshots
+---
+Sign in page
+
+![signin_mobile](./screenshots/larvis_signin_mobile.PNG)
+
+Home page
+
+![signin_mobile](./screenshots/larvis_home_mobile.PNG)
+
+Home page (cont.)
+
+![signin_mobile](./screenshots/larvis_home_mobile_2.PNG)
+
+Home page (cont.)
+
+![signin_mobile](./screenshots/larvis_home_mobile_3.PNG)
+
+View all users
+
+![signin_mobile](./screenshots/larvis_users_mobile.PNG)
+
+Update a user
+
+![signin_mobile](./screenshots/larvis_update_user_mobile.PNG)
 
