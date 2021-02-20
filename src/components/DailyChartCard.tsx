@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       width: `100%`,
-      textAlign: 'center',
+      textAlign: `center`,
     },
     cardContent: {
       height: 400,
@@ -25,7 +25,6 @@ interface ChartCardProps {
 export default function ChartCard({ title, data, type }: ChartCardProps) {
   const classes = useStyles();
 
-  // TODO turn type to enum
   function renderChart(type: string, data: DailyAcquisition[]) {
     switch (type) {
       case 'line':

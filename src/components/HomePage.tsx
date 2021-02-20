@@ -35,15 +35,15 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
-      display: 'felx',
-      flexDirection: 'column',
+      display: `felx`,
+      flexDirection: `column`,
     },
     loadingText: {
       marginTop: theme.spacing(6),
     },
     dataCard: {
       height: 200,
-      textAlign: 'center',
+      textAlign: `center`,
     },
     fab: {
       position: `fixed`,

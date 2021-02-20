@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { GlobalState } from './redux/reducers';
 import { Backdrop, CircularProgress, Typography } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import SigninPage from './components/SigninPage';
 import PrivateRoute from './components/PrivateRoute';
 import RoutingPage from './components/RoutingPage';
 import SnackBar from './components/Snackbar';
+import { GlobalState } from './redux/reducers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
-      display: 'felx',
-      flexDirection: 'column',
+      display: `felx`,
+      flexDirection: `column`,
     },
     loadingText: {
       marginTop: theme.spacing(6),

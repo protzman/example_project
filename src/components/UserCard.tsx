@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
 import {
   Card,
   CardContent,
@@ -14,7 +13,6 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Edit, Person } from '@material-ui/icons';
 import clsx from 'clsx';
 import faker from 'faker';
-
 import { GlobalState } from '../redux/reducers';
 import { UserResponse } from '../types';
 

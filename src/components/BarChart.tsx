@@ -56,6 +56,8 @@ export default function BarChart({ data }: AmBarChartProps): ReactElement {
     chartRef.current.cursor.snapToSeries = lineSeries;
     chartRef.current.cursor.xAxis = dateAxis;
 
+    chartRef.current.zoomOutButton.background.fill = am4core.color('#71b17f');
+
     return () => {
       if (chartRef.current) {
         chartRef.current.dispose();

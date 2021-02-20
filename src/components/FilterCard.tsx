@@ -16,15 +16,15 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       width: `100%`,
-      textAlign: 'center',
+      textAlign: `center`,
     },
     cardContent: {
       [theme.breakpoints.up('md')]: {
         height: 464,
       },
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      display: `flex`,
+      justifyContent: `center`,
+      alignItems: `center`,
     },
     gridItem: {
       [theme.breakpoints.down('md')]: {

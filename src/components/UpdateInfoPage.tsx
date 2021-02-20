@@ -37,10 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface UpdateInfoPageProps {
-  user_id: string;
-}
-
 export default function UpdateInfoPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -98,7 +94,6 @@ export default function UpdateInfoPage() {
         alert: `Updated account info.`,
       });
     } catch (error) {
-      console.log(`error... ${error}`);
       dispatch(setApplicationLoading(false));
     }
   }
@@ -151,7 +146,7 @@ export default function UpdateInfoPage() {
                   color="secondary"
                   onClick={updateInfo}
                   disabled={
-                    credentials.name === '' && credentials.password_new === ''
+                    credentials.name === '' || credentials.password_new === ''
                   }
                 >
                   Update

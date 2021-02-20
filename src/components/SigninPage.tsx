@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
         padding: theme.spacing(3),
         background: theme.palette.primary.main,
         width: 400,
-        position: 'absolute',
+        position: `absolute`,
         top: `calc(50% - 250px)`,
         right: `calc(50% - 200px)`,
       },

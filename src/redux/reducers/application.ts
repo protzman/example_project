@@ -10,7 +10,7 @@ export interface ApplicationState {
   loadingText?: string;
   snackbarMessage: string;
   snackbarSeverity: Severity;
-  snackbarTimestamp: Date; // used to create unique object with each change
+  snackbarTimestamp: Date;
 }
 
 const initialApplicationState: ApplicationState = {

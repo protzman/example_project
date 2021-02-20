@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Snackbar, Alert, Typography } from '@material-ui/core';
+import { Snackbar, Alert } from '@material-ui/core';
 import { GlobalState } from '../redux/reducers';
 import {
   createStyles,
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const snackBarTheme = createMuiTheme({
   palette: {
-    mode: 'light',
+    mode: `light`,
   },
 });
 

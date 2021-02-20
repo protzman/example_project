@@ -9,7 +9,6 @@ export const fetchUsersRequest = () => {
   };
 };
 
-// TODO RENAME USERREPONSE TO USERSRESPONSE
 export const fetchUsersSuccess = (users: UserResponse[]) => {
   return async (dispatch: Dispatch) => {
     dispatch({

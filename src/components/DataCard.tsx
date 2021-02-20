@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),
     },
     dataCard: {
-      textAlign: 'center',
+      textAlign: `center`,
       [theme.breakpoints.down('md')]: {
         minHeight: 159,
       },
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     rootGrid: {
-      height: '100%',
+      height: `100%`,
     },
   })
 );
