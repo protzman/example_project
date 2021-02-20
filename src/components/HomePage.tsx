@@ -47,13 +47,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     fab: {
       position: `fixed`,
-      padding: theme.spacing(1, 3),
+      padding: theme.spacing(0.5, 3),
       left: theme.spacing(2),
       bottom: theme.spacing(2),
       color: theme.palette.text.primary,
     },
     extendedIcon: {
-      marginRight: theme.spacing(1),
+      marginLeft: theme.spacing(2),
     },
   })
 );
@@ -155,8 +155,8 @@ export default function HomePage() {
                 <NormalizedChartCard
                   title={`Sites for ${new Date(
                     activeDate?.date
-                  ).toLocaleString()}`}
-                  type="line"
+                  ).toLocaleDateString()}`}
+                  type="pie"
                   data={activeDate?.acquisitions}
                 />
               </Grid>
@@ -170,8 +170,8 @@ export default function HomePage() {
               className={classes.fab}
               onClick={() => history.push('/users')}
             >
-              <People className={classes.extendedIcon} />
               <Typography variant="overline">Users</Typography>
+              <People className={classes.extendedIcon} />
             </Fab>
           )}
         </React.Fragment>

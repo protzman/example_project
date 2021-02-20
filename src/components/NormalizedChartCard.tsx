@@ -4,6 +4,7 @@ import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import LineChart from './LineChart';
 import BarChart from './BarChart';
+import PieChart from './PieChart';
 import { NormalizedAcquisition } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,6 +39,8 @@ export default function NormalizedChartCard({
         return <LineChart data={data} />;
       case 'bar':
         return <BarChart data={data} />;
+      case 'pie':
+        return <PieChart data={data} />;
       default:
         <Typography variant="overline">Something went wrong...</Typography>;
     }
