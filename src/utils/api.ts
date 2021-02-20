@@ -1,18 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
 const url = `http://localhost:8080`;
 import {
   TokenRequest,
   TokenResponse,
   AcquisitionResponse,
-  //TODO RENAME USER OBJECT TO SOMETHING LIKE AUTH'D USER / BASIC USER - EXTEND BASIC USER FOR USER RESPONSE?
+  User,
   UserResponse,
   UserUpdate,
-} from './types';
-import { User } from '../types/user';
-
-interface HttpResponse<T> extends Response {
-  data?: T;
-}
+} from '../types';
 
 const fetchAsync = async (request: RequestInfo): Promise<Response> => {
   const response = await fetch(request);
@@ -23,7 +17,6 @@ const fetchAsync = async (request: RequestInfo): Promise<Response> => {
   return response;
 };
 
-// TODO REVISIT AND RENAME
 export const fetchToken = async ({
   user_id,
   password,

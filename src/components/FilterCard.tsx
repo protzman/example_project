@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { GlobalState } from '../redux/reducers';
-
 import {
   Card,
   CardContent,
@@ -12,9 +10,7 @@ import {
   Autocomplete,
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { DailyAcquisition, PerDayAcquisition } from '../utils/types';
-import Chart from './Chart';
-import BarChart from './BarChart';
+import { PerDayAcquisition } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,9 +33,6 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         width: 400,
       },
-    },
-    adornment: {
-      marginRight: '-4px',
     },
     textField: {
       borderRadius: theme.shape.borderRadius,

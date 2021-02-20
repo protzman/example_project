@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   Card,
@@ -8,12 +10,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { fetchToken } from '../utils/api';
 import { signInRequest, signInSuccess } from '../redux/actions/auth';
 import { setApplicationLoading } from '../redux/actions/application';
-import { TokenRequest } from '../utils/types';
+import { TokenRequest } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +51,6 @@ export default function SigninPage() {
   async function signin() {
     try {
       dispatch(setApplicationLoading(true, `signing in...`));
-      // simulate load
       await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(signInRequest(credentials));
       const response = await fetchToken(credentials);
@@ -71,7 +70,6 @@ export default function SigninPage() {
     }
   }
 
-  // TODO CREATE FORM HOOK
   return (
     <Card className={classes.card}>
       <CardContent>

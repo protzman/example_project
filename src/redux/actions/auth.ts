@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { SignInRequest, SignInSuccess } from '../../utils/types';
+import { SignInRequest, SignInSuccess } from '../../types';
 
 export enum AuthActionTypes {
   SIGN_IN_REQUEST = 'SIGN_IN_REQUEST',

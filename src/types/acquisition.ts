@@ -1,5 +1,3 @@
-import { PerDayAcquisition } from '../utils/types';
-
 export interface FetchAcquisitionsSuccess {
   acquisitions: AcquisitionResponse[];
 }
@@ -37,4 +35,18 @@ export interface NormalizedAcquisition {
 export interface AcquisitionResponse {
   sites: number;
   timestamp: number;
+}
+
+export interface DailyAcquisition {
+  date: string;
+  total: number;
+  sites: number;
+}
+
+/**
+ * PerDayAcquisition are a group of the acquisitions that occur on the same day and the date they occur
+ */
+export interface PerDayAcquisition {
+  date: string;
+  acquisitions: NormalizedAcquisition[];
 }

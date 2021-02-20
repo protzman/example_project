@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 // TODO MOVE CHART PROPS TO LIKE APP PROPS OR SOMETHING
-import { ChartCardProps, DailyAcquisition } from '../utils/types';
+import { DailyAcquisition } from '../types/acquisition';
 import Chart from './Chart';
 import BarChart from './BarChart';
 
@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+interface ChartCardProps {
+  title: string;
+  type: string;
+  data: DailyAcquisition[];
+}
 
 export default function ChartCard({ title, data, type }: ChartCardProps) {
   const classes = useStyles();

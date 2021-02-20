@@ -4,7 +4,7 @@ import {
   NormalizedAcqusitionData,
   NormalizedAcquisition,
   PerDayAcquisition,
-} from './types';
+} from '../types';
 
 /**
  * use this method to generate statistics on all acquisition entries

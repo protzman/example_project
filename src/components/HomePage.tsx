@@ -22,8 +22,9 @@ import { fetchUser, fetchAcquisitions } from '../utils/api';
 import { normalizeAcquisitions } from '../utils/helpers';
 import { People } from '@material-ui/icons';
 import { fetchUserRequest, fetchUserSuccess } from '../redux/actions/user';
-import { PerDayAcquisition } from '../utils/types';
+import { PerDayAcquisition } from '../types';
 import NormalizedChartCard from './NormalizedChartCard';
+// TODO ORGANIZE IMPORTS
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -3,8 +3,8 @@ import {
   AcquisitionResponse,
   NormalizedAcquisition,
   DailyAcquisition,
+  PerDayAcquisition,
 } from '../../types/acquisition';
-import { PerDayAcquisition } from '../../utils/types';
 import {
   AcquisitionActions,
   AcquisitionActionTypes,

@@ -4,8 +4,8 @@ import {
   NormalizedAcquisition,
   NormalizedAcqusitionData,
   DailyAcquisition,
-} from '../../types/acquisition';
-import { PerDayAcquisition } from '../../utils/types';
+  PerDayAcquisition,
+} from '../../types';
 
 export enum AcquisitionActionTypes {
   FETCH_ACQUISITIONS_REQUEST = 'FETCH_ACQUISITIONS_REQUEST',
