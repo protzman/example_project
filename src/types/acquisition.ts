@@ -2,10 +2,6 @@ export interface FetchAcquisitionsSuccess {
   acquisitions: AcquisitionResponse[];
 }
 
-export interface FetchAcquisitionsFailure {
-  error: string;
-}
-
 export interface AcquisitionResponse {
   sites: number;
   timestamp: number;
@@ -40,7 +36,6 @@ export interface PerDayAcquisition {
 export enum AcquisitionActionTypes {
   FETCH_ACQUISITIONS_REQUEST = 'FETCH_ACQUISITIONS_REQUEST',
   FETCH_ACQUISITIONS_SUCCESS = 'FETCH_ACQUISITIONS_SUCCESS',
-  FETCH_ACQUISITIONS_FAILURE = 'FETCH_ACQUISITIONS_FAILURE',
   SET_NORMALIZED_ACQUISITIONS = 'SET_NORMALIZED_ACQUISITIONS',
 }
 

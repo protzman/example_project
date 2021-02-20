@@ -98,7 +98,6 @@ export default function UpdateInfoPage() {
     }
   }
 
-  // TODO CREATE FORM HOOK
   return (
     <React.Fragment>
       {!loading && (
@@ -145,9 +144,7 @@ export default function UpdateInfoPage() {
                   variant="outlined"
                   color="secondary"
                   onClick={updateInfo}
-                  disabled={
-                    credentials.name === '' || credentials.password_new === ''
-                  }
+                  disabled={credentials.name === ''}
                 >
                   Update
                 </Button>

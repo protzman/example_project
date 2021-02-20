@@ -24,15 +24,6 @@ export const fetchAcquisitionsSuccess = (
   };
 };
 
-export const fetchAcquisitionsFailure = (error: string) => {
-  return async (dispatch: Dispatch) => {
-    dispatch({
-      type: AcquisitionActionTypes.FETCH_ACQUISITIONS_FAILURE,
-      error,
-    });
-  };
-};
-
 export const setNormalizedAcquisitionData = (
   normalizedAcquisitionData: NormalizedAcqusitionData
 ) => {

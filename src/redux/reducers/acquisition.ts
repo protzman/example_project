@@ -42,11 +42,6 @@ export const acquisitionReducer: Reducer<
         ...state,
         acquisitions: action.acquisitions,
       };
-    case AcquisitionActionTypes.FETCH_ACQUISITIONS_FAILURE:
-      return {
-        ...state,
-      };
-    // TODO GO BACK AND ADD REQ/SUC/FAL HERE
     case AcquisitionActionTypes.SET_NORMALIZED_ACQUISITIONS:
       return {
         ...state,
