@@ -6,7 +6,10 @@ Bootstrapped with Create React App and built with Typescript, Material-ui, and R
 - Make sure the docker container containing the Larvis api is running in the background at port `:8080` as that is where the ui sends its requests. If you are having trouble running the docker container follow these steps :
 
   ```
-  // First get into the directory where the Dockerfile is located. It works easiest in a linux environment but if you are on windows consider downloading WSL (Windows Subsystem Linux). Run the following commands.
+  /**
+   * First get into the directory where the Dockerfile is located. It works easiest in a linux environment but  
+   * if you are on windows consider downloading WSL (Windows Subsystem Linux). Run the following commands.
+   */
 
   docker build -t larvis-api .
 
