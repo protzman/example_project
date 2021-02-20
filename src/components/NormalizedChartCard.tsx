@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Chart from './Chart';
+import LineChart from './LineChart';
 import BarChart from './BarChart';
-import { NormalizedAcquisition } from '../types/acquisition';
+import { NormalizedAcquisition } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +35,7 @@ export default function NormalizedChartCard({
   function renderChart(type: string, data: NormalizedAcquisition[]) {
     switch (type) {
       case 'line':
-        return <Chart data={data} />;
+        return <LineChart data={data} />;
       case 'bar':
         return <BarChart data={data} />;
       default:

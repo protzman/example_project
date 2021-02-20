@@ -11,12 +11,6 @@ export interface AcquisitionResponse {
   timestamp: number;
 }
 
-export interface DailyAcquisition {
-  date: string;
-  total: number;
-  sites: number;
-}
-
 export interface NormalizedAcqusitionData {
   normalizedEntries: NormalizedAcquisition[];
   groupedEntries: DailyAcquisition[];
@@ -32,11 +26,6 @@ export interface NormalizedAcquisition {
   sites: number;
 }
 
-export interface AcquisitionResponse {
-  sites: number;
-  timestamp: number;
-}
-
 export interface DailyAcquisition {
   date: string;
   total: number;
@@ -50,3 +39,23 @@ export interface PerDayAcquisition {
   date: string;
   acquisitions: NormalizedAcquisition[];
 }
+
+export enum AcquisitionActionTypes {
+  FETCH_ACQUISITIONS_REQUEST = 'FETCH_ACQUISITIONS_REQUEST',
+  FETCH_ACQUISITIONS_SUCCESS = 'FETCH_ACQUISITIONS_SUCCESS',
+  FETCH_ACQUISITIONS_FAILURE = 'FETCH_ACQUISITIONS_FAILURE',
+  SET_NORMALIZED_ACQUISITIONS = 'SET_NORMALIZED_ACQUISITIONS',
+}
+
+export interface AcquisitionAction {
+  type: AcquisitionActionTypes;
+  acquisitions: AcquisitionResponse[];
+  normalizedAcquisitions: NormalizedAcquisition[];
+  groupedAcquisitions: DailyAcquisition[];
+  perDayAcquisitions: PerDayAcquisition[];
+  total: number;
+  averagePerDay: number;
+  minMax: string;
+}
+
+export type AcquisitionActions = AcquisitionAction;

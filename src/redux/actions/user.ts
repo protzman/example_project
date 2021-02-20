@@ -1,26 +1,5 @@
 import { Dispatch } from 'redux';
-import { UserResponse } from '../../types/user';
-import { User } from '../../types/user';
-
-export enum UserActionTypes {
-  FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST',
-  FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS',
-  FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE',
-
-  FETCH_USER_REQUEST = 'FETCH_USER_REQUEST',
-  FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS',
-  FETCH_USER_FAILURE = 'FETCH_USER_FAILURE',
-
-  UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST',
-  UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS',
-  UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE',
-}
-
-interface UserAction {
-  type: UserActionTypes;
-  users: UserResponse[];
-  user: User | undefined;
-}
+import { UserActionTypes, User, UserResponse } from '../../types';
 
 export const fetchUsersRequest = () => {
   return async (dispatch: Dispatch) => {
@@ -73,5 +52,3 @@ export const updateUserSuccess = (user: UserResponse) => {
     });
   };
 };
-
-export type UserActions = UserAction;

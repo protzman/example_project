@@ -1,7 +1,10 @@
 import { Reducer } from 'redux';
-import { UserResponse, User } from '../../types/user';
-import { UserActions, UserActionTypes } from '../actions/user';
-
+import {
+  UserResponse,
+  User,
+  UserActions,
+  UserActionTypes,
+} from '../../types/user';
 export interface UserState {
   users: UserResponse[];
   user: User | undefined;

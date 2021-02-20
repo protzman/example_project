@@ -26,12 +26,6 @@ export function normalizeAcquisitions(
 
     const groupedDate = new Date(item.timestamp * 1000);
     groupedDate.setHours(0, 0, 0, 0);
-    // console.log(correctedDate);
-    // console.log(groupedDate);
-
-    // ---
-    // console.log(correctedDate.toISOString());
-    // console.log(groupedDate.toISOString());
 
     const normalizedEntry: NormalizedAcquisition = {
       sites: item.sites,

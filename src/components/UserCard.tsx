@@ -6,8 +6,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardActions,
-  Button,
   Typography,
   Avatar,
   IconButton,
@@ -18,7 +16,7 @@ import clsx from 'clsx';
 import faker from 'faker';
 
 import { GlobalState } from '../redux/reducers';
-import { UserResponse } from '../types/user';
+import { UserResponse } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

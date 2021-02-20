@@ -1,10 +1,7 @@
-import React from 'react';
-
 import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-// TODO MOVE CHART PROPS TO LIKE APP PROPS OR SOMETHING
-import { DailyAcquisition } from '../types/acquisition';
-import Chart from './Chart';
+import { DailyAcquisition } from '../types';
+import LineChart from './LineChart';
 import BarChart from './BarChart';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,7 +29,7 @@ export default function ChartCard({ title, data, type }: ChartCardProps) {
   function renderChart(type: string, data: DailyAcquisition[]) {
     switch (type) {
       case 'line':
-        return <Chart data={data} />;
+        return <LineChart data={data} />;
       case 'bar':
         return <BarChart data={data} />;
       default:

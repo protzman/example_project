@@ -25,12 +25,24 @@ export interface UserResponse {
   password?: string;
 }
 
-export interface SignInRequest {
-  user_id: string;
-  password: string;
+export enum UserActionTypes {
+  FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST',
+  FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS',
+  FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE',
+
+  FETCH_USER_REQUEST = 'FETCH_USER_REQUEST',
+  FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS',
+  FETCH_USER_FAILURE = 'FETCH_USER_FAILURE',
+
+  UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST',
+  UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS',
+  UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE',
 }
 
-export interface SignInSuccess {
-  user_id: string;
-  token?: string;
+export interface UserAction {
+  type: UserActionTypes;
+  users: UserResponse[];
+  user: User | undefined;
 }
+
+export type UserActions = UserAction;

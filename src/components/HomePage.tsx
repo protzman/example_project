@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { GlobalState } from '../redux/reducers';
+
 import { Fab, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import {
   makeStyles,
@@ -9,22 +9,24 @@ import {
   Theme,
   useTheme,
 } from '@material-ui/core/styles';
-import DataCard from './DataCard';
-import FilterCard from './FilterCard';
 import {
   fetchAcquisitionsRequest,
   fetchAcquisitionsSuccess,
   setNormalizedAcquisitionData,
 } from '../redux/actions/acquisition';
-import ChartCard from './ChartCard';
+
+import DailyChartCard from './DailyChartCard';
+import DataCard from './DataCard';
+import FilterCard from './FilterCard';
+import NormalizedChartCard from './NormalizedChartCard';
+
+import { GlobalState } from '../redux/reducers';
 import { setApplicationLoading } from '../redux/actions/application';
 import { fetchUser, fetchAcquisitions } from '../utils/api';
 import { normalizeAcquisitions } from '../utils/helpers';
 import { People } from '@material-ui/icons';
 import { fetchUserRequest, fetchUserSuccess } from '../redux/actions/user';
 import { PerDayAcquisition } from '../types';
-import NormalizedChartCard from './NormalizedChartCard';
-// TODO ORGANIZE IMPORTS
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -109,14 +111,14 @@ export default function HomePage() {
               secondaryText={`Minimum Maximum`}
             />
             <Grid item xs={12}>
-              <ChartCard
+              <DailyChartCard
                 title={`Grouped Daily Sites Count`}
                 type="line"
                 data={groupedAcquisitions}
               />
             </Grid>
             <Grid item xs={12}>
-              <ChartCard
+              <DailyChartCard
                 title={`Grouped Daily Sites Count`}
                 type="bar"
                 data={groupedAcquisitions}

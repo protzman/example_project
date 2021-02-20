@@ -1,14 +1,12 @@
 import { Reducer } from 'redux';
 import {
+  AcquisitionActionTypes,
+  AcquisitionActions,
   AcquisitionResponse,
   NormalizedAcquisition,
   DailyAcquisition,
   PerDayAcquisition,
-} from '../../types/acquisition';
-import {
-  AcquisitionActions,
-  AcquisitionActionTypes,
-} from '../actions/acquisition';
+} from '../../types';
 
 export interface AcquisitionState {
   acquisitions: AcquisitionResponse[];

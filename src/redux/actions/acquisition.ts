@@ -1,29 +1,9 @@
 import { Dispatch } from 'redux';
 import {
+  AcquisitionActionTypes,
   AcquisitionResponse,
-  NormalizedAcquisition,
   NormalizedAcqusitionData,
-  DailyAcquisition,
-  PerDayAcquisition,
 } from '../../types';
-
-export enum AcquisitionActionTypes {
-  FETCH_ACQUISITIONS_REQUEST = 'FETCH_ACQUISITIONS_REQUEST',
-  FETCH_ACQUISITIONS_SUCCESS = 'FETCH_ACQUISITIONS_SUCCESS',
-  FETCH_ACQUISITIONS_FAILURE = 'FETCH_ACQUISITIONS_FAILURE',
-  SET_NORMALIZED_ACQUISITIONS = 'SET_NORMALIZED_ACQUISITIONS',
-}
-
-interface AcquisitionAction {
-  type: AcquisitionActionTypes;
-  acquisitions: AcquisitionResponse[];
-  normalizedAcquisitions: NormalizedAcquisition[];
-  groupedAcquisitions: DailyAcquisition[];
-  perDayAcquisitions: PerDayAcquisition[];
-  total: number;
-  averagePerDay: number;
-  minMax: string;
-}
 
 export const fetchAcquisitionsRequest = () => {
   return async (dispatch: Dispatch) => {
@@ -68,5 +48,3 @@ export const setNormalizedAcquisitionData = (
     });
   };
 };
-
-export type AcquisitionActions = AcquisitionAction;

@@ -2,7 +2,7 @@ import { ReactElement, useLayoutEffect, useRef } from 'react';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import * as am4core from '@amcharts/amcharts4/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { DailyAcquisition, NormalizedAcquisition } from '../types/acquisition';
+import { DailyAcquisition, NormalizedAcquisition } from '../types';
 
 export interface AmTimelineChartProps {
   data: DailyAcquisition[] | NormalizedAcquisition[];
@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Chart({ data }: AmTimelineChartProps): ReactElement {
+export default function LineChart({
+  data,
+}: AmTimelineChartProps): ReactElement {
   const divRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<am4charts.XYChart>();
   const classes = useStyles();

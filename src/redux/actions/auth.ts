@@ -1,18 +1,5 @@
 import { Dispatch } from 'redux';
-import { SignInRequest, SignInSuccess } from '../../types';
-
-export enum AuthActionTypes {
-  SIGN_IN_REQUEST = 'SIGN_IN_REQUEST',
-  SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS',
-  SIGN_OUT = 'SIGN_OUT',
-}
-
-interface AuthenticationAction {
-  type: AuthActionTypes;
-  user_id: string;
-  authorized: boolean;
-  token: string;
-}
+import { AuthActionTypes, SignInRequest, SignInSuccess } from '../../types';
 
 export const signInRequest = (creds: SignInRequest) => {
   return async (dispatch: Dispatch) => {
@@ -42,5 +29,3 @@ export const signOut = () => {
     });
   };
 };
-
-export type AuthenticationActions = AuthenticationAction;
