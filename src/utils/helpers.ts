@@ -13,7 +13,6 @@ import {
 export function normalizeAcquisitions(
   acquisitions: AcquisitionResponse[]
 ): NormalizedAcqusitionData {
-  // sort data and turn timestamps into dates
   let allEntries = acquisitions.sort((a, b) => a.timestamp - b.timestamp) || [];
 
   const normalizedEntries = allEntries.map((item) => {
