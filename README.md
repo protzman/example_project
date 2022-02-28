@@ -1,4 +1,4 @@
-# larvis ui.
+# example_project ui.
 
 Bootstrapped with Create React App and built with Typescript, Material-ui, and Redux. This is both a desktop friendly app as well as mobile friendly. Open the developer tools in Chrome and click the 'Toggle Device Toolbar' in the top left to view on other screen sizes.
 
